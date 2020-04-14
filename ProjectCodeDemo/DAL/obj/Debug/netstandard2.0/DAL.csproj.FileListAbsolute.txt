@@ -1,0 +1,8 @@
+E:\Learning\ProjectCodeDemo\DAL\bin\Debug\netstandard2.0\DAL.deps.json
+E:\Learning\ProjectCodeDemo\DAL\bin\Debug\netstandard2.0\DAL.dll
+E:\Learning\ProjectCodeDemo\DAL\bin\Debug\netstandard2.0\DAL.pdb
+E:\Learning\ProjectCodeDemo\DAL\obj\Debug\netstandard2.0\DAL.AssemblyInfoInputs.cache
+E:\Learning\ProjectCodeDemo\DAL\obj\Debug\netstandard2.0\DAL.AssemblyInfo.cs
+E:\Learning\ProjectCodeDemo\DAL\obj\Debug\netstandard2.0\DAL.csproj.CoreCompileInputs.cache
+E:\Learning\ProjectCodeDemo\DAL\obj\Debug\netstandard2.0\DAL.dll
+E:\Learning\ProjectCodeDemo\DAL\obj\Debug\netstandard2.0\DAL.pdb
