@@ -29,12 +29,7 @@ namespace ProjectCodeDemoApp.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            return RedirectToAction(nameof(UserList));
         }
 
         /// <summary>
@@ -45,8 +40,6 @@ namespace ProjectCodeDemoApp.Controllers
         [Route("/Home/User")]
         public IActionResult User()
         {
-            var userData = _userRepository.Users.GetAllUserData();
-            ViewBag.userData = userData;
             return View();
         }
 
@@ -55,46 +48,67 @@ namespace ProjectCodeDemoApp.Controllers
         public IActionResult UserList()
         {
             var userData = _userRepository.Users.GetAllUserData();
-            ViewBag.userData = userData.ToList();
-            return View();
+            return View(userData);
+        }
+
+        [HttpGet]
+        [Route("/Home/EditUser")]
+        public IActionResult Edit(int id)
+        {
+            var userData = _userRepository.Users.GetUser(id);
+            return View(userData);
+        }
+
+        [HttpGet]
+        [Route("/Home/DeleteUser")]
+        public IActionResult Delete(int id)
+        {
+            var userData = _userRepository.Users.GetUser(id);
+            _userRepository.Users.Remove(userData);
+            _userRepository.SaveChanges();
+            return RedirectToAction(nameof(UserList));
         }
 
         [HttpPost]
         [Route("/Home/UserSave")]
         public ActionResult UserSave(UserViewModel user)
         {
-            DAL.Models.User dUser = new DAL.Models.User(); //We can use AutoMapper here but manually assigning because it is demo project
-            dUser.Name = user.Name;
-            dUser.City = user.City;
-            dUser.Email = user.Email;
-            dUser.Address = user.Address;
-            dUser.PhoneNumber = user.PhoneNumber;
-            dUser.DateCreated = System.DateTime.Now;
-            dUser.DateModified = System.DateTime.Now;
+            DAL.Models.User dUser = new DAL.Models.User()
+            {
+                Name = user.Name,
+                City = user.City,
+                Email = user.Email,
+                Address = user.Address,
+                PhoneNumber = user.PhoneNumber,
+                DateCreated = System.DateTime.Now,
+                DateModified = System.DateTime.Now,
+            };
 
             _userRepository.Users.Add(dUser);
             _userRepository.SaveChanges();
 
-            return View("Home/User");
+            return RedirectToAction(nameof(UserList));
         }
 
         [HttpPost]
         [Route("/Home/UserUpdate")]
         public ActionResult UserUpdate(UserViewModel user)
         {
-            DAL.Models.User dUser = new DAL.Models.User();
-            dUser.Name = user.Name;
-            dUser.City = user.City;
-            dUser.Email = user.Email;
-            dUser.Address = user.Address;
-            dUser.PhoneNumber = user.PhoneNumber;
-            dUser.DateCreated = System.DateTime.Now;
-            dUser.DateModified = System.DateTime.Now;
-
-            _userRepository.Users.Add(dUser);
+            DAL.Models.User dUser = new DAL.Models.User()
+            {
+                Id = user.Id,
+                Name = user.Name,
+                City = user.City,
+                Email = user.Email,
+                Address = user.Address,
+                PhoneNumber = user.PhoneNumber,
+                DateCreated = System.DateTime.Now,
+                DateModified = System.DateTime.Now,
+            };
+            _userRepository.Users.Update(dUser);
             _userRepository.SaveChanges();
 
-            return View("Home/User");
+            return RedirectToAction(nameof(UserList));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

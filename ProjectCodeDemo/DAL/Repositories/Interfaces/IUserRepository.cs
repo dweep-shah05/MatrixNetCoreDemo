@@ -9,6 +9,7 @@ namespace DAL.Repositories.Interfaces
     {
         IEnumerable<User> GetTopUsersCount(int count);
         IEnumerable<User> GetAllUserData();
+        User GetUser(int id);
 
         bool SaveUser(User user);
         bool EditUser(User user);
