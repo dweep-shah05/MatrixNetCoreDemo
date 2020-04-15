@@ -23,6 +23,12 @@ namespace DAL.Repositories
                 .ToList();
         }
 
+        public User GetUser(int id)
+        {
+            return _appContext.Users.Where(x => x.Id == id).FirstOrDefault() ;
+                
+        }
+
         public bool SaveUser(User user)
         {
             if (user != null)
